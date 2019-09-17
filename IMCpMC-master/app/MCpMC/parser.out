@@ -1,0 +1,189 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> def
+Rule 1     empty -> <empty>
+Rule 2     def -> mdptype unfold
+Rule 3     unfold -> declParamList unfold
+Rule 4     unfold -> declConstList unfold
+Rule 5     unfold -> declGlobalList unfold
+Rule 6     unfold -> moduleList unfold
+Rule 7     unfold -> labelList unfold
+Rule 8     unfold -> rewards unfold
+Rule 9     unfold -> initdef unfold
+Rule 10    unfold -> formulas unfold
+Rule 11    unfold -> empty
+Rule 12    formulas -> formula SC formulas
+Rule 13    formulas -> empty
+Rule 14    formula -> FORMULA NAME EQUAL funexp
+Rule 15    mdptype -> MDP
+Rule 16    mdptype -> CTMC
+Rule 17    mdptype -> DTMC
+Rule 18    declParamList -> declParam SC declParamList
+Rule 19    declParamList -> declParam SC
+Rule 20    declParam -> PARAM type NAME DDOT LCROCHET funexp POINTPOINT funexp RCROCHET
+Rule 21    declParam -> PARAM type NAME
+Rule 22    declParam -> PARAM type NAME LACCO funexp POINTPOINT funexp RACCO
+Rule 23    type -> empty
+Rule 24    type -> INT
+Rule 25    type -> TYPEFLOAT
+Rule 26    type -> BOOL
+Rule 27    type -> DOUBLE
+Rule 28    declConstList -> declConst SC declConstList
+Rule 29    declConstList -> declConst SC
+Rule 30    declConst -> CONST type NAME EQUAL funexp
+Rule 31    declGlobalList -> declGlobal SC declGlobalList
+Rule 32    declGlobalList -> declGlobal SC
+Rule 33    declGlobal -> GLOBALL NAME DDOT LCROCHET funexp POINTPOINT funexp RCROCHET
+Rule 34    declGlobal -> GLOBALL NAME DDOT LCROCHET funexp POINTPOINT funexp RCROCHET INIT funexp
+Rule 35    declGlobal -> GLOBALL NAME DDOT BOOL
+Rule 36    moduleList -> module moduleList
+Rule 37    moduleList -> module
+Rule 38    module -> modName stateList transList endmodule
+Rule 39    module -> reModName LCROCHET listIdState RCROCHET endmodule
+Rule 40    modName -> MODULE NAME
+Rule 41    reModName -> MODULE NAME EQUAL NAME
+Rule 42    listIdState -> NAME EQUAL NAME
+Rule 43    listIdState -> NAME EQUAL NAME VIRGULE listIdState
+Rule 44    endmodule -> ENDMODULE
+Rule 45    stateList -> stateDecl SC stateList
+Rule 46    stateList -> empty
+Rule 47    stateDecl -> NAME DDOT LCROCHET funexp POINTPOINT funexp RCROCHET
+Rule 48    stateDecl -> NAME DDOT LCROCHET funexp POINTPOINT funexp RCROCHET INIT funexp
+Rule 49    stateDecl -> NAME DDOT BOOL
+Rule 50    transList -> trans SC transList
+Rule 51    transList -> empty
+Rule 52    trans -> LCROCHET RCROCHET funexp FLECHE updatesProb
+Rule 53    trans -> LCROCHET NAME RCROCHET funexp FLECHE updatesProb
+Rule 54    updatesProb -> funexp DIV funexp DDOT updates PLUS updatesPr
+Rule 55    updatesProb -> funexp DIV funexp DDOT updates
+Rule 56    updatesProb -> updates
+Rule 57    updates -> upd AND updates
+Rule 58    updates -> upd
+Rule 59    upd -> LPAR NAME NEW EQUAL funexp RPAR
+Rule 60    labelList -> label SC labelList
+Rule 61    labelList -> label SC
+Rule 62    label -> LABEL QUOTE NAME QUOTE EQUAL listCond
+Rule 63    listCond -> NAME EQUAL funexp AND listCond
+Rule 64    listCond -> NAME EQUAL funexp
+Rule 65    rewards -> REWARDS rew ENDREWARDS rewards
+Rule 66    rewards -> REWARDS rew ENDREWARDS
+Rule 67    rew -> QUOTE NAME QUOTE funexp DDOT funexp SC rew
+Rule 68    rew -> LCROCHET NAME RCROCHET funexp DDOT funexp SC rew
+Rule 69    rew -> LCROCHET RCROCHET funexp DDOT funexp SC rew
+Rule 70    rew -> empty
+Rule 71    initdef -> INIT initlist ENDINIT
+Rule 72    initlist -> ainit
+Rule 73    initlist -> ainit AND initlist
+Rule 74    ainit -> NAME EQUAL funexp
+Rule 75    funexp -> funexp PLUS funexp
+Rule 76    funexp -> funexp MINUS funexp
+Rule 77    funexp -> funexp DIV funexp
+Rule 78    funexp -> funexp MULT funexp
+Rule 79    funexp -> funexp GEQ funexp
+Rule 80    funexp -> funexp GS funexp
+Rule 81    funexp -> funexp LS funexp
+Rule 82    funexp -> funexp LEQ funexp
+Rule 83    funexp -> funexp EQUAL funexp
+Rule 84    funexp -> funexp AND funexp
+Rule 85    funexp -> funexp OR funexp
+Rule 86    funexp -> LPAR funexp RPAR
+Rule 87    funexp -> NOT funexp
+Rule 88    funexp -> MINUS funexp
+Rule 89    funexp -> FLOAT
+Rule 90    funexp -> TRUE
+Rule 91    funexp -> FALSE
+Rule 92    funexp -> NAME
+Rule 93    funexp -> NAME LACCO funexp RACCO
+
+Terminals, with rules where they appear
+
+AND                  : 57 63 73 84
+BOOL                 : 26 35 49
+CONST                : 30
+CTMC                 : 16
+DDOT                 : 20 33 34 35 47 48 49 54 55 67 68 69
+DIV                  : 54 55 77
+DOUBLE               : 27
+DTMC                 : 17
+ENDINIT              : 71
+ENDMODULE            : 44
+ENDREWARDS           : 65 66
+EQUAL                : 14 30 41 42 43 59 62 63 64 74 83
+FALSE                : 91
+FLECHE               : 52 53
+FLOAT                : 89
+FORMULA              : 14
+GEQ                  : 79
+GLOBALL              : 33 34 35
+GS                   : 80
+INIT                 : 34 48 71
+INT                  : 24
+LABEL                : 62
+LACCO                : 22 93
+LCROCHET             : 20 33 34 39 47 48 52 53 68 69
+LEQ                  : 82
+LPAR                 : 59 86
+LS                   : 81
+MDP                  : 15
+MINUS                : 76 88
+MODULE               : 40 41
+MULT                 : 78
+NAME                 : 14 20 21 22 30 33 34 35 40 41 41 42 42 43 43 47 48 49 53 59 62 63 64 67 68 74 92 93
+NEW                  : 59
+NOT                  : 87
+OR                   : 85
+PARAM                : 20 21 22
+PLUS                 : 54 75
+POINTPOINT           : 20 22 33 34 47 48
+QUOTE                : 62 62 67 67
+RACCO                : 22 93
+RCROCHET             : 20 33 34 39 47 48 52 53 68 69
+REWARDS              : 65 66
+RPAR                 : 59 86
+SC                   : 12 18 19 28 29 31 32 45 50 60 61 67 68 69
+TRUE                 : 90
+TYPEFLOAT            : 25
+VIRGULE              : 43
+error                : 
+
+Nonterminals, with rules where they appear
+
+ainit                : 72 73
+declConst            : 28 29
+declConstList        : 4 28
+declGlobal           : 31 32
+declGlobalList       : 5 31
+declParam            : 18 19
+declParamList        : 3 18
+def                  : 0
+empty                : 11 13 23 46 51 70
+endmodule            : 38 39
+formula              : 12
+formulas             : 10 12
+funexp               : 14 20 20 22 22 30 33 33 34 34 34 47 47 48 48 48 52 53 54 54 55 55 59 63 64 67 67 68 68 69 69 74 75 75 76 76 77 77 78 78 79 79 80 80 81 81 82 82 83 83 84 84 85 85 86 87 88 93
+initdef              : 9
+initlist             : 71 73
+label                : 60 61
+labelList            : 7 60
+listCond             : 62 63
+listIdState          : 39 43
+mdptype              : 2
+modName              : 38
+module               : 36 37
+moduleList           : 6 36
+reModName            : 39
+rew                  : 65 66 67 68 69
+rewards              : 8 65
+stateDecl            : 45
+stateList            : 38 45
+trans                : 50
+transList            : 38 50
+type                 : 20 21 22 30
+unfold               : 2 3 4 5 6 7 8 9 10
+upd                  : 57 58
+updates              : 54 55 56 57
+updatesPr            : 54
+updatesProb          : 52 53
+
